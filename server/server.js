@@ -14,16 +14,14 @@ mongoose
   .then(() => console.log("DB connected"))
   .catch((err) => console.log("DB Error => ", err));
 
-// routes
-fs.readdirSync('./routes').map((route) => 
-    app.use('/api', require(`./routes/${route}`))
- );
-
-// apply middleware
-app.use(cors());
-app.use(express.json());
-app.use(morgan('dev'));
-
+  
+  // apply middleware
+  app.use(cors());
+  app.use(express.json());
+  app.use(morgan('dev'));
+  
+  // routes
+  fs.readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`)));
 
 
 //port

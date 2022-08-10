@@ -1,4 +1,7 @@
 import { useState } from "react";
+import axios from 'axios';
+
+
 const Register = () => {
     // stores name from form
     const [name, setName] = useState('');
@@ -9,10 +12,18 @@ const Register = () => {
 
 
 
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.table({name, email, password})
+        // console.table({name, email, password})
+        const {data} = await axios.post(`http://localhost:8000/api/register`, {
+            name,
+            email,
+            password
+        })
+        console.log('Register response', data)
     }
+
+
     return (
         <>
             <h1 className='jumbotron text-center bg-primary square'>Register</h1>
