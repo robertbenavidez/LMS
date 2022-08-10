@@ -18,4 +18,4 @@ export const hashPassword = (password) => {
 
 export const comparePassword = (password, hashed) => {
     return bcrpyt.compare(password, hashed)
-}
+};
