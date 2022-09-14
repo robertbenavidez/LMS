@@ -1,8 +1,8 @@
-import bcrpyt, { hash } from "bcrypt";
+import bcrpyt from "bcrypt";
 
 export const hashPassword = (password) => {
     return new Promise((resolve, reject) => {
-        bcrpyt.genSalt(8, (err, salt) => {
+        bcrpyt.genSalt(7, (err, salt) => {
             if(err) {
                 reject(err)
             }

@@ -5,12 +5,12 @@ const userSchema = new Schema({
     name: {
         type: String,
         trim: true,
-        require: true,
+        required: true,
     },
     email:  {
         type: String,
         trim: true,
-        require: true,
+        required: true,
         unique: true,
     },
     password: {
@@ -33,4 +33,7 @@ const userSchema = new Schema({
     stripeSession: {},
 }, {timestamps: true});
 
-export default mongoose.model("User", userSchema);
+// export default mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema)
+
+export default User
