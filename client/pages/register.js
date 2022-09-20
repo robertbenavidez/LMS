@@ -23,10 +23,10 @@ const Register = () => {
                 password
             })
             // console.log('Register response', data)
-            toast.success('Registration Succesful')
+            toast('Registration Succesful')
             
         } catch (err) {
-            toast.error(err.response.data)
+            toast(err.response.data)
         }
     }
 
