@@ -34,3 +34,9 @@ export const register = async (req, res) => {
         return res.status(400).send('Error. Try again.')
     }
 }
+
+// Login todos
+// check if user password is correct
+//     compare user password by hashing the entered password 
+//     to the hashed password in the DB 
+// Generatate JWT and send it to the client
