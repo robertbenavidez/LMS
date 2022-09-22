@@ -1,19 +1,15 @@
 import User from '../models/user'
 import { hashPassword, comparePassword } from '../utils/auth'
-
+import jwt from 'jsonwebtoken'
 
 export const register = async (req, res) => {
     try {
-        // console.log(req.body)
         // validate user
         // Note: this is crude validation. Look into a non Yup validation solution
         
         const { name, email, password } = req.body;
         if (!name) return res.status(400).send('Name required.')
         if (!email) return res.status(400).send('Email required')
-        // if (!password || password.length < 6) {
-        //     return res.status(400).send('Password must be at least 6 letters and or numbers long')
-        // }
         let userExist = await User.findOne({email}).exec();
         if (userExist) return res.status(400).send("email is taken")
 
@@ -35,6 +31,41 @@ export const register = async (req, res) => {
     }
 }
 
+export const login = async (req, res) => {
+    try {
+        console.log('login', req.body)
+        // email and password from frontend login
+        const {email, password} = req.body
+
+        // Check if the user email is in the DB
+        const user = await User.findOne({ email }).exec();
+        if (!user) return res.status(400).send('No user found')
+
+        // compare password to password in the DB
+        const match = await comparePassword(password, user.password)
+
+        // Create signed JWT
+        const token = jwt.sign(
+            {
+                id: user._id}, 
+                process.env.JWT_SECRET, 
+                {expiresIn: "7d"
+            })
+        
+            // return user and token to client, exclude hashed password
+            res.cookie('token', token, {
+                httpOnly: true,
+                // secure: true, // only works on https
+            })
+
+            // send user as json response
+            res.json(user)
+
+    } catch (err) {
+        console.log(err)
+        return res.status(400).send('Error, Try again.')
+    }
+}
 // Login todos
 // check if user password is correct
 //     compare user password by hashing the entered password 
