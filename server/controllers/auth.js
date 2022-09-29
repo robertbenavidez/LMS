@@ -71,3 +71,7 @@ export const login = async (req, res) => {
 //     compare user password by hashing the entered password 
 //     to the hashed password in the DB 
 // Generatate JWT and send it to the client
+
+
+
+// Hey this some code I'm commiting to github
