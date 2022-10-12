@@ -18,7 +18,7 @@ const Login = () => {
     // State
     const {state, dispatch} = useContext(Context)
 
-    console.log('state', state)
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,6 +35,9 @@ const Login = () => {
                 type: "Login",
                 payload: data,
             })
+            // save in local storage
+            window.localStorage.setItem('user', JSON.stringify(data))
+
         } catch (err) {
             toast(err.response.data)
             setLoading(false)
