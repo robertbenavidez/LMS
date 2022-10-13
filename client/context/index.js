@@ -11,9 +11,9 @@ const Context = createContext();
 // root reducer
 const rootReducer = (state, action) => {
     switch (action.type) {
-        case "Login":
+        case "LOGIN":
             return {...state, user: action.payload};
-        case "Logout":
+        case "LOGOUT":
             return {...state, user: null}
         default:
             return state
@@ -26,7 +26,7 @@ const Provider = ({children}) => {
 
     useEffect(() => {
         dispatch({
-            type: "Login",
+            type: "LOGIN",
             payload: JSON.parse(window.localStorage.getItem('user')),
         })
     }, [])
