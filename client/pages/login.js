@@ -4,7 +4,7 @@ import {toast} from 'react-toastify'
 import { SyncOutlined } from "@ant-design/icons";
 import Link from 'next/link';
 import {Context} from '../context'
-import Router, { userRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 
 const Login = () => {
@@ -18,6 +18,8 @@ const Login = () => {
 
     // State
     const {state, dispatch} = useContext(Context)
+
+    const router = useRouter()
 
     
 
@@ -40,7 +42,7 @@ const Login = () => {
             window.localStorage.setItem('user', JSON.stringify(data))
             // redirect to homepage
             // Once I set up roles, redirect will push to the requisite path
-            Router.push('/')
+            router.push('/')
 
         } catch (err) {
             toast(err.response.data)
