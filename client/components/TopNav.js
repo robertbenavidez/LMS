@@ -1,11 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
 import { Menu } from 'antd';
 import Link from 'next/link';
-import {AppstoreOutlined, LoginOutlined, LogoutOutlined, UserAddOutlined} from '@ant-design/icons'
+import {AppstoreOutlined, LoginOutlined, LogoutOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons'
 import {Context} from '../context'
 import axios from 'axios';
 import {useRouter} from 'next/router'
 import {toast} from 'react-toastify'
+import SubMenu from 'antd/lib/menu/SubMenu';
 
 // Menu.Item
 const { Item } = Menu; 
@@ -57,9 +58,15 @@ const TopNav = () => {
             )}
 
             {user !== null && (
-                <Item onClick={logout} icon={<LogoutOutlined />} className="float-right">
+                <SubMenu icon={<UserOutlined />} title={user.name}>
+                    <Item 
+                        onClick={logout} 
+                        icon={<LogoutOutlined />} 
+                        className="float-right"
+                >
                     Logout
                 </Item>
+                </SubMenu>
             )}
         </Menu>
     )
