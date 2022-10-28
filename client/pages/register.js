@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import {Context} from '../context'
 import axios from 'axios';
 import {toast} from 'react-toastify'
 import { SyncOutlined } from "@ant-design/icons";
 import Link from 'next/link';
-
+import { useRouter } from "next/router";
 
 const Register = () => {
     // stores name from form
@@ -15,6 +16,16 @@ const Register = () => {
     // state for loading
     const [loading, setLoading] = useState(false)
 
+    const router = useRouter()
+
+    // State
+    const {state, dispatch} = useContext(Context)
+    const {user} = state
+
+    // prevents logged-in user from accessing register page
+    useEffect(() => {
+        if (user !== null) router.push('/');
+    }, [user]);
 
 
     const handleSubmit = async (e) => {

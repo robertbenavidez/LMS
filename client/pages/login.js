@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from 'axios';
 import {toast} from 'react-toastify'
 import { SyncOutlined } from "@ant-design/icons";
@@ -18,8 +18,14 @@ const Login = () => {
 
     // State
     const {state, dispatch} = useContext(Context)
+    const {user} = state
 
     const router = useRouter()
+
+    // prevents logged-in user from accessing the login page
+    useEffect(() => {
+        if (user !== null) router.push('/');
+    }, [user]);
 
     
 
